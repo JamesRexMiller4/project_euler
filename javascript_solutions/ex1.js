@@ -7,14 +7,12 @@
 // Solution: 
 
 findSum3to5 = (num) => {
-  let arr = []
+  let arr = [];
    for (let i = 1; i< num; i++) {
       if (i % 3 === 0 || i % 5 === 0) {
-          arr.push(i)
+        arr.push(i);
       }
-  
    }
   
-  let sum = arr.reduce((acc, curVal) => acc + curVal)
-  return sum 
-  }
+  return arr.reduce((acc, curVal) => acc + curVal)
+}
