@@ -6,16 +6,16 @@ const findLargestPrime = (n) => {
     let factors = [];
     let i = 2;
     const calcFactors = (num, divisor) => {
-      while (num % divisor !== 0) {
+        while (num % divisor !== 0) {
+            divisor++;
+        }
+        num = num / divisor;
+        factors.push(divisor);
         divisor++;
-      }
-      num = num / divisor;
-      factors.push(divisor);
-      divisor++;
 
-      if (divisor < num) {
-        calcFactors(num, divisor);
-      } else return;
+        if (divisor < num) {
+            calcFactors(num, divisor);
+        } else return;
     };
     calcFactors(n, i);
     let idx = factors.length - 1;
