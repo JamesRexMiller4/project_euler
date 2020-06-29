@@ -11,18 +11,18 @@
 // Solution:
 
 evenFibonacciSum = (max) => {
-  let i = 2;
-  let j = 3;
-  let x;
-  let arr = [];
-  while (i < max) {
-    if (i % 2 === 0) {
-      arr.push(i)
+    let i = 2;
+    let j = 3;
+    let x;
+    let arr = [];
+    while (i < max) {
+        if (i % 2 === 0) {
+            arr.push(i);
+        }
+        x = i + j
+        i = j
+        j = x
     }
-    x = i + j
-    i = j
-    j = x
-  }
 
-  return arr.reduce((acc, curVal) => acc + curVal)
-}
+    return arr.reduce((acc, curVal) => acc + curVal);
+};
