@@ -8,12 +8,12 @@ const sumOfPrimes = (threshold) => {
     for (let i = 2; i < threshold; i++) {
         let bool = true;
         if (i % 2 !== 0) {
-          primes.forEach(prime => {
-              if (i % prime === 0) {
-                  bool = false;
-              }
-          });
-          bool ? primes.push(i) : console.log(primes)
+            primes.forEach(prime => {
+                if (i % prime === 0) {
+                    bool = false;
+                }
+            });
+        bool ? primes.push(i) : console.log(primes)
         }
     };
     let sum = primes.reduce((acc, curVal) => acc + curVal);
