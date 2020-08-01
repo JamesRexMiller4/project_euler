@@ -41,12 +41,78 @@ const numberGrid = [
   ["86", "56", "00", "48", "35", "71", "89", "07", "05", "44", "44", "37", "44", "60", "21", "58", "51", "54", "17", "58"],
   ["19", "80", "81", "68", "05", "94", "47", "69", "28", "73", "92", "13", "86", "52", "17", "77", "04", "89", "55", "40"],
   ["04", "52", "08", "83", "97", "35", "99", "16", "07", "97", "57", "32", "16", "26", "26", "79", "33", "27", "98", "66"],
+  ["88", "36", "68", "87", "57", "62", "20", "72", "03", "46", "33", "67", "46", "55", "12", "32", "63", "93", "53", "69",],
+  ["04", "42", "16", "73", "38", "25", "39", "11", "24", "94", "72", "18", "08", "46", "29", "32", "40", "62", "76", "36"],
   ["20", "69", "36", "41", "72", "30", "23", "88", "34", "62", "99", "69", "82", "67", "59", "85", "74", "04", "36", "16"],
   ["20", "73", "35", "29", "78", "31", "90", "01", "74", "31", "49", "71", "48", "86", "81", "16", "23", "57", "05", "54"],
   ["01", "70", "54", "71", "83", "51", "54", "69", "16", "92", "33", "48", "61", "43", "52", "01", "89", "19", "67", "48"]
 ]
 
 const getProduct = (arr) => {
-    console.log(arr.length);
-    console.log(arr[0].length);
+    let verticalMax = 0;
+    let horizontalMax = 0;
+    let diagonalMax = 0;
+
+    calcHorizontalMax = () => {
+        arr.forEach(row => {
+            row.forEach((num, index) => {
+              if (index <= 16) {
+                let sum  = parseInt(num) * parseInt(row[index + 1]) * parseInt(row[index + 2]) * parseInt(row[index + 3]);
+                if (sum) {
+                  sum > horizontalMax ? horizontalMax = sum : null;
+                }
+              }
+            });
+        });
+    };
+
+    calcVerticalMax = () => {
+        arr.forEach((row, idx) => {
+            row.forEach((num, index) => {
+              if (idx <  15) {
+                let sum = parseInt(num) * parseInt(arr[idx + 1][index]) * parseInt(arr[idx + 2][index]) * parseInt(arr[idx + 3][index]);
+                if (sum) {
+                  sum > verticalMax ? verticalMax = sum : null;
+                }
+              }
+            });
+        });
+    };
+
+    calcDiagonalMax = () => {
+      arr.forEach((row, idx) => {
+          row.forEach((num, index) => {
+            if (idx <= 16 && index <= 16) {
+              let sum = parseInt(num) * parseInt(arr[idx + 1][index + 1]) * parseInt(arr[idx + 2][index + 2]) * parseInt(arr[idx + 3][index + 3]);
+              if (sum) {
+                sum > diagonalMax ? diagonalMax = sum : null;
+              }
+            }
+          });
+      });
+    };
+
+    calcReverseDiagonalMax = () => {
+      let reverseArr = [];
+      arr.forEach((row, idx) => reverseArr.push(row.reverse()));
+      calcDiagonalMax(reverseArr);
+    }
+    
+
+    calcHorizontalMax(arr);
+    calcVerticalMax(arr);
+    calcDiagonalMax(arr);
+    calcReverseDiagonalMax(arr);
+
+    if (horizontalMax > verticalMax && horizontalMax > diagonalMax) {
+      return console.log("horizontalMax", horizontalMax);
+    }
+    if (verticalMax > horizontalMax && verticalMax > diagonalMax) {
+      return console.log("verticalMax", verticalMax);
+    }
+    if (diagonalMax > horizontalMax && diagonalMax > verticalMax) {
+      return console.log("diagonalMax", diagonalMax)
+    }
 }
+
+getProduct(numberGrid);
