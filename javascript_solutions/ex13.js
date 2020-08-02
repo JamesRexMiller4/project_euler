@@ -204,36 +204,48 @@ const nums = [
   "53503534226472524250874054075591789781264330331690"
 ]
 
-let smallNums = ["24", "25", "26", "28"]
+let smallNums = ["28", "75", "24", "26"]
+
 
 const findFirst10DigitsOfSum = (arr) => {
   let sum = "";
-  arr.forEach((bigNum, idx) => {
-    if (idx === 0) {
-      sum = bigNum;
-    } else {
-      for (let i = 0; i < sum.length; i++) {
-        let carry = 0;
-        let a = sum.charAt[sum.length - 1 - i];
-        let b = bigNum.charAt[bigNum.length - 1 - i];
+  let carry = 0;
 
-        let addedDigits = (parseInt(a) + parseInt(b) + carry).toString();
+  const addTwoNumStrings = (numOne, numTwo) => {
+    let workingSum = "";
 
-        sum[sum.length - 1 - i] = addedDigits.charAt[addedDigits.length - 1];
-        console.log(sum);
-        
-        carry = parseInt(addedDigits.substr(0, addedDigits.length - 1));
-        carry = (carry) ? carry : 0; 
-        if (i === sum.length - 1) {
-          sum = carry.toString() + sum
-        }
+    for (let i = 0; i < numOne.length; i++) {
+      let charA = numOne.charAt(numOne.length - 1 - i);
+      let charB = numTwo.charAt(numTwo.length - 1 - i);
+
+      if (!charB) {
+        charB = "0"
       }
+
+      let tempSum = (parseInt(charA) + parseInt(charB) + carry).toString();
+      let lastDigit = tempSum.charAt(tempSum.length - 1);
+      carry = parseInt(tempSum.slice(0, tempSum.length - 1));
+
+      if (!carry) carry = 0;
+
+      workingSum = lastDigit + workingSum;
+    };
+
+    if (carry > 0) {
+      workingSum = carry + workingSum;
+      carry = 0;
     }
+    return workingSum
+  };
+
+  arr.forEach((num, idx) => {
+    if (idx === 0) sum = num
+    if (idx > 0) sum = addTwoNumStrings(sum, num)
   })
 
-  let firstTen = sum.substr(0, 10);
-  console.log(sum);
-  console.log(firstTen);
+
+  let result = sum.slice(0, 10);
+  console.log(result);
 }
 
-findFirst10DigitsOfSum(smallNums);
+findFirst10DigitsOfSum(nums);
