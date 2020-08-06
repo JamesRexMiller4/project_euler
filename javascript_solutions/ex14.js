@@ -16,35 +16,43 @@ const findLongestChain = () => {
   const oddRule = (n) => 3 * n + 1;
   const evenRule = (n) => n / 2;
   let max = 0;
+  let largestChainNum = 0;
 
-  const calcCollatzChain = (n, arr) => {
-    switch (n % 2) {  
+  const calcCollatzChain = (n) => {
+    let temp = n % 2
+    
+    switch (temp) {  
       case 0:
         n = evenRule(n);
-        arr.push(n);
         return n
         break;
       case 1:
         n = oddRule(n);
-        arr.push(n);
         return n
         break;
       default:
-        return arr;
+        return "All done";
         break;
     }
   }
 
   for (let i = 1000000; i > 1; --i) {
-    let chainArr = [];
     let result = i;
-    while (typeof(result) !== "object") {
-      result = calcCollatzChain(result, chainArr)
+    let num = i;
+    let resultLength = 0;
+
+    while (result !== 1) {
+      resultLength++
+      result = calcCollatzChain(result)
     }
-    result.length > max ? max = result.length : max
-    console.log(i);
+
+    if (resultLength > max) {
+      max = resultLength;
+      largestChainNum = num;
+    }
   }
-  console.log(max)
+  console.log("max", max);
+  console.log("largestChainNum", largestChainNum);
 }
 
 findLongestChain()
