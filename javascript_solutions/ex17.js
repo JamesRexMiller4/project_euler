@@ -62,9 +62,9 @@ const countLettersTotal = () => {
         return (legend[hundreds] + legend["hundred"] + legend["and"] + legend[ones])
       } else if (tens === "0" && ones === "0") {
         return (legend[hundreds] + legend["hundred"])
-      } else if (parseInt(tens) < 2 && parseInt(ones) > 0){
+      } else if (parseInt(tens) === 1 && parseInt(ones) > 0){
         let teens = str.slice(1, 3)
-        return (legend[hundreds] + legend["hundred"] + legend[teens])
+        return (legend[hundreds] + legend["hundred"] + legend["and"] + legend[teens])
       } else if (tens !== "0" && ones === "0") {
         return (legend[hundreds] + legend["hundred"] + legend["and"] + legend[tens + "0"])
       } else {
@@ -91,7 +91,6 @@ const countLettersTotal = () => {
     if (i === 1000) {
       letterSum += legend["1"] + legend["thousand"]
     }
-    console.log(i, letterSum)
   }
   console.log(letterSum)
 }
