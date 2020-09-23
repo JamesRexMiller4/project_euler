@@ -71,17 +71,21 @@ const calcLatticePathRoutes = (arr) => {
     const route = "D".repeat(arr.length) + "R".repeat(arr.length);
 
     const permutate = (str) => {
+      console.log(str)
       if (str.length <= 2) return str.length === 2 ? [str, [str[1] + str[0]]] : str
       return str
         .split('')
         .reduce(
-          (acc, dir, i) => 
-          acc.concat(permutate(str.slice(0, i) + str.slice(i + 1)).map(val => dir + val)),
+          (acc, dir, i) => {
+          console.log(permutate(str.slice(0, i) + str.slice(i + 1)).map(val => dir + val))
+          return acc.concat(permutate(str.slice(0, i) + str.slice(i + 1)).map(val => dir + val))},
           []
         );
     }
 
     let allRoutes = permutate(route)
+
+    console.log(allRoutes)
 
     const removeDuplicates = (arr) => arr.filter((a, b) => arr.indexOf(a) === b);
 
@@ -90,8 +94,8 @@ const calcLatticePathRoutes = (arr) => {
     // console.log("filteredRoutes", filteredAllRoutes);
     console.log(filteredAllRoutes.length)
 }
-calcLatticePathRoutes(twoByTwo);
-calcLatticePathRoutes(threeByThree);
+// calcLatticePathRoutes(twoByTwo);
+// calcLatticePathRoutes(threeByThree);
 calcLatticePathRoutes(fiveByFive);
 // calcLatticePathRoutes(tenByTen);
 // calcLatticePathRoutes(twentyByTwenty);
