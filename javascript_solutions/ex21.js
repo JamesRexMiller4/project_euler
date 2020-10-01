@@ -9,33 +9,32 @@ Evaluate the sum of all the amicable numbers under 10000. */
 
 const calcSum10000Amicably = (nums) => {
   const sumDivisors = (num) => {
-    let divisors = [];
-    for (let i = 1; i < num; i++) {
-      console.log(i)
+    let divisors = [1];
+    for (let i = 2; i < num; i++) {
       if (num % i === 0) {
         divisors.push(i);
       }
+      
     }
-    console.log(divisors)
     return divisors.reduce((acc, val) => acc + val);
   };
 
   let sum = nums.filter((num) => {
     let total = sumDivisors(num);
-    console.log(total, 'total')
-    if (sumDivisors(total) === num) {
+    if (sumDivisors(total) === num && total !== num) {
+      console.log(num, 'num')
       return num;
     }
   })
-  // .reduce((acc, val) => {
-  //   acc += val
-  //   return acc
-  // }, 0);
+  .reduce((acc, val) => {
+    acc += val
+    return acc
+  }, 0);
   console.log(sum);
 };
 
 let nums = [];
-for (let i = 2; i < 10; i++) {
+for (let i = 2; i < 10000; i++) {
   nums.push(i);
 }
 calcSum10000Amicably(nums);
