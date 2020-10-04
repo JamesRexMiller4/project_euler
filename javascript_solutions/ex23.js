@@ -9,16 +9,19 @@ As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest numb
 Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 */
 const UPPERLIMIT = 28123;
-const LOWERLIMIT = 24;
+const LOWERLIMITABUNDANTSUM = 24;
+const LOWERLIMITABUNDANTNUM = 12;
 
 const findIntsNotSumsOfAbundantNums = (abundantSums) => {
   const integers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
-  for (let i = LOWERLIMIT + 1; i < UPPERLIMIT; i++) {
+  for (let i = LOWERLIMITABUNDANTSUM + 1; i < UPPERLIMIT; i++) {
+    console.log(i, "pushing integers")
     if (!abundantSums.includes(i)) {
       integers.push(i);
     }
   }
+
   return console.log(sumIntegers(integers));
 }
 
@@ -29,15 +32,11 @@ const sumIntegers = (ints) => {
 const findAbundantNumbers = () => {
   let abundantNums = [];
 
-  for (let i = LOWERLIMIT; i < UPPERLIMIT; i++) {
-    let bool = isAbundant(i);
-    console.log(bool);
-    if (bool) {
+  for (let i = LOWERLIMITABUNDANTNUM; i < UPPERLIMIT; i++) {
+    if (isAbundant(i)) {
       abundantNums.push(i);
     }
   }
-  console.log('completed find abundant nums');
-  console.log(abundantNums);
   return abundantNums;
 };
 
@@ -56,10 +55,11 @@ const sumAbundantNumsCombos = (nums) => {
 
 const isAbundant = (num) => {
   let divisors = findDivisors(num);
-  console.log(divisors, 'divisors', num)
-  console.log(sumDivisors(divisors), 'sumDivisors')
+  let sum = sumDivisors(divisors);
 
-  sumDivisors(findDivisors(num)) > num ? true : false;
+  if (sum > num) {
+    return true
+  } else return false
 };
 
 const findDivisors = (num) => {
