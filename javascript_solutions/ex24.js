@@ -32,6 +32,9 @@ const lexicographicPermutations = () => {
     return permutationsArr; 
   };
 
+  const sortPermutation = () => {
+    
+  }
 
 
 };
